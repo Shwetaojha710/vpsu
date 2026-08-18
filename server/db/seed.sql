@@ -86,3 +86,76 @@ INSERT INTO colleges (name, code, district, type, email, phone, is_active) VALUE
 ('PG College Ghazipur', 'PGG04', 'Ghazipur', 'government', 'pgg@example.com', '05482220004', true),
 ('Baba Barua Das PG College', 'BBD05', 'Ambedkar Nagar', 'affiliated', 'bbd@example.com', '05271220005', true),
 ('Sant Kabir Mahavidyalaya', 'SKM06', 'Mau', 'affiliated', 'skm@example.com', '05472220006', true);
+
+INSERT INTO menus (title, title_hi, url, sort_order, is_active) VALUES
+('Home', 'होम', '/', 1, true),
+('University', 'विश्वविद्यालय', '#', 2, true),
+('Faculties', 'संकाय', '#', 3, true),
+('Admission', 'प्रवेश', '/admission', 4, true),
+('Research', 'शोध', '/research', 5, true),
+('Examination', 'परीक्षा', '/examination', 6, true),
+('Facilities', 'सुविधाएँ', '#', 7, true),
+('Affiliation', 'सम्बद्धता', '/affiliation', 8, true),
+('Alumni', 'पूर्व छात्र', '/alumni', 9, true),
+('Grievance', 'शिकायत', '/grievance', 10, true);
+
+INSERT INTO menus (parent_id, title, title_hi, url, sort_order, is_active)
+SELECT id, 'About University', 'विश्वविद्यालय परिचय', '/about', 1, true FROM menus WHERE title = 'University' AND parent_id IS NULL;
+INSERT INTO menus (parent_id, title, title_hi, url, sort_order, is_active)
+SELECT id, 'Vice Chancellor', 'कुलपति', '/vice-chancellor', 2, true FROM menus WHERE title = 'University' AND parent_id IS NULL;
+INSERT INTO menus (parent_id, title, title_hi, url, sort_order, is_active)
+SELECT id, 'Vision and Mission', 'दृष्टि एवं लक्ष्य', '/vision', 3, true FROM menus WHERE title = 'University' AND parent_id IS NULL;
+INSERT INTO menus (parent_id, title, title_hi, url, sort_order, is_active)
+SELECT id, 'Acts and Statutes', 'अधिनियम', '/acts', 4, true FROM menus WHERE title = 'University' AND parent_id IS NULL;
+
+INSERT INTO menus (parent_id, title, title_hi, url, sort_order, is_active)
+SELECT id, 'History', 'इतिहास', '/about/history', 1, true FROM menus WHERE title = 'About University';
+INSERT INTO menus (parent_id, title, title_hi, url, sort_order, is_active)
+SELECT id, 'NAAC Accreditation', 'NAAC मान्यता', '/about/naac', 2, true FROM menus WHERE title = 'About University';
+
+INSERT INTO menus (parent_id, title, title_hi, url, sort_order, is_active)
+SELECT id, 'Faculty of Science', 'विज्ञान संकाय', '/faculties/science', 1, true FROM menus WHERE title = 'Faculties' AND parent_id IS NULL;
+INSERT INTO menus (parent_id, title, title_hi, url, sort_order, is_active)
+SELECT id, 'Faculty of Arts', 'कला संकाय', '/faculties/arts', 2, true FROM menus WHERE title = 'Faculties' AND parent_id IS NULL;
+INSERT INTO menus (parent_id, title, title_hi, url, sort_order, is_active)
+SELECT id, 'Faculty of Commerce', 'वाणिज्य संकाय', '/faculties/commerce', 3, true FROM menus WHERE title = 'Faculties' AND parent_id IS NULL;
+INSERT INTO menus (parent_id, title, title_hi, url, sort_order, is_active)
+SELECT id, 'Faculty of Law', 'विधि संकाय', '/faculties/law', 4, true FROM menus WHERE title = 'Faculties' AND parent_id IS NULL;
+
+INSERT INTO menus (parent_id, title, title_hi, url, sort_order, is_active)
+SELECT id, 'B.Sc', 'बी.एससी', '/faculties/science/bsc', 1, true FROM menus WHERE title = 'Faculty of Science';
+INSERT INTO menus (parent_id, title, title_hi, url, sort_order, is_active)
+SELECT id, 'M.Sc', 'एम.एससी', '/faculties/science/msc', 2, true FROM menus WHERE title = 'Faculty of Science';
+
+INSERT INTO menus (parent_id, title, title_hi, url, sort_order, is_active)
+SELECT id, 'PUCAT', 'पी.यू.कैट', '/admission/pucat', 1, true FROM menus WHERE title = 'Admission' AND parent_id IS NULL;
+INSERT INTO menus (parent_id, title, title_hi, url, sort_order, is_active)
+SELECT id, 'Campus Courses', 'परिसर पाठ्यक्रम', '/admission/campus', 2, true FROM menus WHERE title = 'Admission' AND parent_id IS NULL;
+INSERT INTO menus (parent_id, title, title_hi, url, sort_order, is_active)
+SELECT id, 'Fee Structure', 'शुल्क संरचना', '/admission/fee', 3, true FROM menus WHERE title = 'Admission' AND parent_id IS NULL;
+
+INSERT INTO menus (parent_id, title, title_hi, url, sort_order, is_active)
+SELECT id, 'PhD', 'पीएचडी', '/research/phd', 1, true FROM menus WHERE title = 'Research' AND parent_id IS NULL;
+INSERT INTO menus (parent_id, title, title_hi, url, sort_order, is_active)
+SELECT id, 'Research Centres', 'शोध केंद्र', '/research/centres', 2, true FROM menus WHERE title = 'Research' AND parent_id IS NULL;
+
+INSERT INTO menus (parent_id, title, title_hi, url, sort_order, is_active)
+SELECT id, 'Exam Form', 'परीक्षा फॉर्म', '/examination/form', 1, true FROM menus WHERE title = 'Examination' AND parent_id IS NULL;
+INSERT INTO menus (parent_id, title, title_hi, url, sort_order, is_active)
+SELECT id, 'Date Sheet', 'डेट शीट', '/examination/datesheet', 2, true FROM menus WHERE title = 'Examination' AND parent_id IS NULL;
+INSERT INTO menus (parent_id, title, title_hi, url, sort_order, is_active)
+SELECT id, 'Result', 'परिणाम', '/examination/result', 3, true FROM menus WHERE title = 'Examination' AND parent_id IS NULL;
+INSERT INTO menus (parent_id, title, title_hi, url, sort_order, is_active)
+SELECT id, 'Admit Card', 'प्रवेश पत्र', '/examination/admit-card', 4, true FROM menus WHERE title = 'Examination' AND parent_id IS NULL;
+
+INSERT INTO menus (parent_id, title, title_hi, url, sort_order, is_active)
+SELECT id, 'Library', 'पुस्तकालय', '/facilities/library', 1, true FROM menus WHERE title = 'Facilities' AND parent_id IS NULL;
+INSERT INTO menus (parent_id, title, title_hi, url, sort_order, is_active)
+SELECT id, 'Hostel', 'छात्रावास', '/facilities/hostel', 2, true FROM menus WHERE title = 'Facilities' AND parent_id IS NULL;
+INSERT INTO menus (parent_id, title, title_hi, url, sort_order, is_active)
+SELECT id, 'Sports', 'खेल', '/facilities/sports', 3, true FROM menus WHERE title = 'Facilities' AND parent_id IS NULL;
+
+INSERT INTO menus (parent_id, title, title_hi, url, sort_order, is_active)
+SELECT id, 'Affiliated Colleges', 'सम्बद्ध महाविद्यालय', '/colleges', 1, true FROM menus WHERE title = 'Affiliation' AND parent_id IS NULL;
+INSERT INTO menus (parent_id, title, title_hi, url, sort_order, is_active)
+SELECT id, 'New Affiliation', 'नई सम्बद्धता', '/affiliation/new', 2, true FROM menus WHERE title = 'Affiliation' AND parent_id IS NULL;

@@ -2,6 +2,8 @@
 -- Run this file after: CREATE DATABASE vpsu;
 
 -- delete old tables if we run this file again
+DROP TABLE IF EXISTS sub_menus;
+DROP TABLE IF EXISTS menus;
 DROP TABLE IF EXISTS notices;
 DROP TABLE IF EXISTS pages;
 DROP TABLE IF EXISTS slider;
@@ -103,5 +105,16 @@ CREATE TABLE colleges (
   type VARCHAR(50) DEFAULT 'affiliated',
   email VARCHAR(150),
   phone VARCHAR(20),
+  is_active BOOLEAN DEFAULT true
+);
+
+-- 10) menus: unlimited nested website menus (parent_id NULL = top menu)
+CREATE TABLE menus (
+  id SERIAL PRIMARY KEY,
+  parent_id INT REFERENCES menus(id) ON DELETE CASCADE,
+  title VARCHAR(150) NOT NULL,
+  title_hi VARCHAR(150),
+  url VARCHAR(255) DEFAULT '#',
+  sort_order INT DEFAULT 0,
   is_active BOOLEAN DEFAULT true
 );

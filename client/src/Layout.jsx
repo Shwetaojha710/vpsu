@@ -5,6 +5,7 @@ const menus = [
   { to: '/dashboard', label: 'Dashboard' },
   { to: '/notices', label: 'Notices' },
   { to: '/pages', label: 'Pages' },
+  { to: '/menus', label: 'Menus' },
   { to: '/slider', label: 'Slider' },
   { to: '/leaders', label: 'Leaders' },
   { to: '/stats', label: 'Stats' },

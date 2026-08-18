@@ -95,6 +95,7 @@ Open: http://localhost:5173
 - Quick links
 - Gallery photos
 - Affiliated colleges
+- Website menus with unlimited nested sub menus
 - Change password
 
 All data is saved in PostgreSQL. The admin panel reads and updates that data.

@@ -163,6 +163,16 @@ th {
   color: #777;
 }
 
+.crumb {
+  margin: -8px 0 16px;
+  font-size: 13px;
+  color: #666;
+}
+
+.crumb a {
+  color: #5b2c8c;
+}
+
 /* buttons */
 .btn {
   display: inline-block;

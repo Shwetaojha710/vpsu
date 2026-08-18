@@ -19,6 +19,8 @@ import Galleries from './pages/Galleries.jsx';
 import GalleryForm from './pages/GalleryForm.jsx';
 import Colleges from './pages/Colleges.jsx';
 import CollegeForm from './pages/CollegeForm.jsx';
+import Menus from './pages/Menus.jsx';
+import MenuForm from './pages/MenuForm.jsx';
 import ChangePassword from './pages/ChangePassword.jsx';
 
 // if there is no token, send user to login page
@@ -64,6 +66,11 @@ function App() {
               <Route path="/colleges" element={<Colleges />} />
               <Route path="/colleges/new" element={<CollegeForm />} />
               <Route path="/colleges/:id" element={<CollegeForm />} />
+              <Route path="/menus" element={<Menus />} />
+              <Route path="/menus/new" element={<MenuForm />} />
+              <Route path="/menus/:parentId/children/new" element={<MenuForm />} />
+              <Route path="/menus/:parentId/children" element={<Menus />} />
+              <Route path="/menus/:id/edit" element={<MenuForm />} />
               <Route path="/change-password" element={<ChangePassword />} />
             </Routes>
           </Protected>

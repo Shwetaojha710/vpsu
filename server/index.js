@@ -32,6 +32,7 @@ app.use('/api/stats', auth, require('./routes/stats'));
 app.use('/api/quick-links', auth, require('./routes/quickLinks'));
 app.use('/api/galleries', auth, require('./routes/galleries'));
 app.use('/api/colleges', auth, require('./routes/colleges'));
+app.use('/api/menus', auth, require('./routes/menus'));
 
 app.use('/api', function (req, res) {
   res.status(404).json({ success: false, message: 'API not found', data: null });
