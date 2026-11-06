@@ -11,7 +11,7 @@ function ChangePassword() {
       method: 'PUT',
       body: { oldPassword: oldPassword, newPassword: newPassword }
     });
-    if (res.success) {
+    if (res.status) {
       alert('Saved');
       setOldPassword('');
       setNewPassword('');

@@ -15,11 +15,14 @@ const storage = multer.diskStorage({
 });
 
 function fileFilter(req, file, cb) {
-  const ok = /\.(pdf|jpg|jpeg|png|webp|gif)$/i.test(file.originalname);
+  const ok =
+    /\.(pdf|jpg|jpeg|png|webp|gif|svg|doc|docx|xls|xlsx|csv|ppt|pptx|zip|rar|7z)$/i.test(
+      file.originalname
+    );
   if (ok) {
     cb(null, true);
   } else {
-    cb(new Error('Only PDF and image files are allowed'));
+    cb(new Error('File type not allowed'));
   }
 }
 

@@ -17,7 +17,7 @@ function SliderForm() {
     if (!isEdit) return;
     async function load() {
       const res = await api('/slider/' + id);
-      if (res.success) {
+      if (res.status) {
         setTitle(res.data.title || '');
         setLink(res.data.link || '');
         setSortOrder(res.data.sort_order || 0);
@@ -41,7 +41,7 @@ function SliderForm() {
       method: isEdit ? 'PUT' : 'POST',
       body: fd
     });
-    if (res.success) {
+    if (res.status) {
       alert('Saved');
       navigate('/slider');
     } else {

@@ -21,14 +21,14 @@ function Login() {
       body: { email: email, password: password }
     });
 
-    if (!res.success) {
+    if (!res.status) {
       setError(res.message || 'Wrong email or password');
       return;
     }
 
     // save token so other pages can call protected APIs
-    saveToken(res.data.token);
-    saveAdmin(res.data.admin);
+    saveToken(res.data?.token);
+    saveAdmin(res.data?.admin);
     navigate('/dashboard');
   }
 

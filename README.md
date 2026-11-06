@@ -4,8 +4,17 @@ Simple admin panel for **Veer Bahadur Singh Purvanchal University, Jaunpur**.
 
 This project has two folders:
 
-- `server` = Node.js + Express + PostgreSQL API
+- `server` = Node.js + Express + PostgreSQL API (MVC)
 - `client` = React admin panel
+
+Backend folders:
+
+- `models` = Sequelize models (`sequelize.define` + DataTypes)
+- `connection` = Sequelize PostgreSQL connection
+- `views` = JSON response format `{ success, message, data }`
+- `controllers` = request logic (validate, call model, send view)
+- `routes` = URL mapping only
+- `middleware` = JWT auth and file upload
 
 Public website is not included yet.
 
@@ -96,6 +105,13 @@ Open: http://localhost:5173
 - Gallery photos
 - Affiliated colleges
 - Website menus with unlimited nested sub menus
+- Sections (Faculty / Cell / Institute)
+- Side menus with page type (static / dynamic / table / custom)
+- Banners per department
+- Department photos
+- Professors linked to a section
 - Change password
 
 All data is saved in PostgreSQL. The admin panel reads and updates that data.
+
+API URLs did not change. Example flow: `routes/notices.js` → `controllers/noticeController.js` → `models/noticeModel.js` → `views/jsonView.js`.

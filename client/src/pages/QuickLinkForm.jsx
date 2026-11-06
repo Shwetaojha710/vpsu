@@ -6,10 +6,11 @@ function QuickLinkForm() {
   const { id } = useParams();
   const navigate = useNavigate();
   const isEdit = Boolean(id);
+  const [file, setFile] = useState(null);
+  const [oldIcon, setOldIcon] = useState('');
   const [form, setForm] = useState({
     title: '',
     url: '',
-    icon: '',
     sort_order: 0,
     is_active: true
   });
@@ -24,14 +25,14 @@ function QuickLinkForm() {
     if (!isEdit) return;
     async function load() {
       const res = await api('/quick-links/' + id);
-      if (res.success) {
+      if (res.status) {
         setForm({
           title: res.data.title || '',
           url: res.data.url || '',
-          icon: res.data.icon || '',
           sort_order: res.data.sort_order || 0,
           is_active: res.data.is_active
         });
+        setOldIcon(res.data.icon || '');
       }
     }
     load();
@@ -39,17 +40,18 @@ function QuickLinkForm() {
 
   async function save(e) {
     e.preventDefault();
+    const fd = new FormData();
+    fd.append('title', form.title);
+    fd.append('url', form.url);
+    fd.append('sort_order', form.sort_order);
+    fd.append('is_active', form.is_active ? 'true' : 'false');
+    if (file) fd.append('icon', file);
+
     const res = await api(isEdit ? '/quick-links/' + id : '/quick-links', {
       method: isEdit ? 'PUT' : 'POST',
-      body: {
-        title: form.title,
-        url: form.url,
-        icon: form.icon,
-        sort_order: Number(form.sort_order),
-        is_active: form.is_active
-      }
+      body: fd
     });
-    if (res.success) {
+    if (res.status) {
       alert('Saved');
       navigate('/quick-links');
     } else {
@@ -72,8 +74,16 @@ function QuickLinkForm() {
           <input value={form.url} onChange={function (e) { setField('url', e.target.value); }} required />
         </div>
         <div className="form-group">
-          <label>Icon name</label>
-          <input value={form.icon} onChange={function (e) { setField('icon', e.target.value); }} />
+          <label>Icon image</label>
+          <input type="file" accept="image/*" onChange={function (e) { setFile(e.target.files[0]); }} />
+          {oldIcon ? (
+            <div className="hint">
+              Current: {oldIcon}
+              <div style={{ marginTop: 8 }}>
+                <img className="preview" src={'/uploads/' + oldIcon} alt="" />
+              </div>
+            </div>
+          ) : null}
         </div>
         <div className="form-group">
           <label>Sort order</label>

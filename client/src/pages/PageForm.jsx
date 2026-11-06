@@ -25,7 +25,7 @@ function PageForm() {
     if (!isEdit) return;
     async function load() {
       const res = await api('/pages/' + id);
-      if (res.success) {
+      if (res.status) {
         setForm({
           slug: res.data.slug || '',
           title: res.data.title || '',
@@ -45,7 +45,7 @@ function PageForm() {
       method: isEdit ? 'PUT' : 'POST',
       body: form
     });
-    if (res.success) {
+    if (res.status) {
       alert('Saved');
       navigate('/pages');
     } else {

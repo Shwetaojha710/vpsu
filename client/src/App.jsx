@@ -21,7 +21,18 @@ import Colleges from './pages/Colleges.jsx';
 import CollegeForm from './pages/CollegeForm.jsx';
 import Menus from './pages/Menus.jsx';
 import MenuForm from './pages/MenuForm.jsx';
+import Sections from './pages/Sections.jsx';
+import SectionForm from './pages/SectionForm.jsx';
+import SideMenus from './pages/SideMenus.jsx';
+import SideMenuForm from './pages/SideMenuForm.jsx';
+import Professors from './pages/Professors.jsx';
+import ProfessorForm from './pages/ProfessorForm.jsx';
+import Banners from './pages/Banners.jsx';
+import BannerForm from './pages/BannerForm.jsx';
+import SectionPhotos from './pages/SectionPhotos.jsx';
+import SectionPhotoForm from './pages/SectionPhotoForm.jsx';
 import ChangePassword from './pages/ChangePassword.jsx';
+import LmsContents from './pages/LmsContents.jsx';
 
 // if there is no token, send user to login page
 function Protected({ children }) {
@@ -71,7 +82,23 @@ function App() {
               <Route path="/menus/:parentId/children/new" element={<MenuForm />} />
               <Route path="/menus/:parentId/children" element={<Menus />} />
               <Route path="/menus/:id/edit" element={<MenuForm />} />
+              <Route path="/sections" element={<Sections />} />
+              <Route path="/sections/new" element={<SectionForm />} />
+              <Route path="/sections/:id" element={<SectionForm />} />
+              <Route path="/side-menus" element={<SideMenus />} />
+              <Route path="/side-menus/new" element={<SideMenuForm />} />
+              <Route path="/side-menus/:id" element={<SideMenuForm />} />
+              <Route path="/professors" element={<Professors />} />
+              <Route path="/professors/new" element={<ProfessorForm />} />
+              <Route path="/professors/:id" element={<ProfessorForm />} />
+              <Route path="/banners" element={<Banners />} />
+              <Route path="/banners/new" element={<BannerForm />} />
+              <Route path="/banners/:id" element={<BannerForm />} />
+              <Route path="/section-photos" element={<SectionPhotos />} />
+              <Route path="/section-photos/new" element={<SectionPhotoForm />} />
+              <Route path="/section-photos/:id" element={<SectionPhotoForm />} />
               <Route path="/change-password" element={<ChangePassword />} />
+              <Route path="/lms/contents" element={<LmsContents />} />
             </Routes>
           </Protected>
         }

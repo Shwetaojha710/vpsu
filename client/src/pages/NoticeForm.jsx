@@ -20,7 +20,7 @@ function NoticeForm() {
     if (!isEdit) return;
     async function load() {
       const res = await api('/notices/' + id);
-      if (res.success) {
+      if (res.status) {
         setTitle(res.data.title || '');
         setTitleHi(res.data.title_hi || '');
         setDescription(res.data.description || '');
@@ -49,7 +49,7 @@ function NoticeForm() {
       body: fd
     });
 
-    if (res.success) {
+    if (res.status) {
       alert('Saved');
       navigate('/notices');
     } else {

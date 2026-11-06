@@ -26,7 +26,7 @@ function CollegeForm() {
     if (!isEdit) return;
     async function load() {
       const res = await api('/colleges/' + id);
-      if (res.success) setForm({
+      if (res.status) setForm({
         name: res.data.name || '',
         code: res.data.code || '',
         district: res.data.district || '',
@@ -45,7 +45,7 @@ function CollegeForm() {
       method: isEdit ? 'PUT' : 'POST',
       body: form
     });
-    if (res.success) {
+    if (res.status) {
       alert('Saved');
       navigate('/colleges');
     } else {

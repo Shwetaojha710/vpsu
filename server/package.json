@@ -6,7 +6,13 @@
   "scripts": {
     "start": "node index.js",
     "dev": "node index.js",
-    "setup-db": "node db/setup.js"
+    "setup-db": "node db/setup.js",
+    "setup-lms": "node db/add-lms.js",
+    "setup-lms-roles": "node db/add-lms-roles.js",
+    "setup-menu-flags": "node db/add-menu-faculty-flags.js",
+    "setup-section-menus": "node db/add-section-menu-link.js",
+    "migrate-lms": "node db/add-lms-roles.js && node db/add-menu-faculty-flags.js && node db/add-section-menu-link.js",
+    "seed-web": "node db/seed-frontend-data.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -15,6 +21,7 @@
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
     "multer": "1.4.5-lts.1",
-    "pg": "^8.13.1"
+    "pg": "^8.13.1",
+    "sequelize": "^6.37.8"
   }
 }

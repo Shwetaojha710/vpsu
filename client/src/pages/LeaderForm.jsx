@@ -17,7 +17,7 @@ function LeaderForm() {
     if (!isEdit) return;
     async function load() {
       const res = await api('/leaders/' + id);
-      if (res.success) {
+      if (res.status) {
         setName(res.data.name || '');
         setDesignation(res.data.designation || '');
         setProfileText(res.data.profile_text || '');
@@ -41,7 +41,7 @@ function LeaderForm() {
       method: isEdit ? 'PUT' : 'POST',
       body: fd
     });
-    if (res.success) {
+    if (res.status) {
       alert('Saved');
       navigate('/leaders');
     } else {

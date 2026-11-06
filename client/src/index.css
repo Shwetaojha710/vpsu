@@ -209,6 +209,14 @@ th {
   max-width: 720px;
 }
 
+.form-wide {
+  max-width: 960px;
+}
+
+.editor .ck-editor__editable {
+  min-height: 220px;
+}
+
 .form-group {
   margin-bottom: 14px;
 }

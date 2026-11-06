@@ -9,13 +9,13 @@ function Menus() {
 
   async function load() {
     // load only this level: top menus, or children of one menu
-    const query = parentId ? '/menus?parent_id=' + parentId : '/menus';
+    const query = parentId ? '/menus/list?parent_id=' + parentId : '/menus/list';
     const res = await api(query);
-    if (res.success) setList(res.data);
+    if (res.status) setList(res.data);
 
     if (parentId) {
       const one = await api('/menus/' + parentId);
-      if (one.success) setParent(one.data);
+      if (one.status) setParent(one.data);
     } else {
       setParent(null);
     }
@@ -28,7 +28,7 @@ function Menus() {
   async function remove(id) {
     if (!window.confirm('Delete this menu and all menus inside it?')) return;
     const res = await api('/menus/' + id, { method: 'DELETE' });
-    if (res.success) load();
+    if (res.status) load();
   }
 
   const backUrl = parent && parent.parent_id

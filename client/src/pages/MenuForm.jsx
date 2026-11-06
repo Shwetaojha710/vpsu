@@ -16,6 +16,9 @@ function MenuForm() {
     title: '',
     title_hi: '',
     url: '#',
+    icon: '',
+    slug: '',
+    page_type: 'custom',
     sort_order: 0,
     is_active: true
   });
@@ -30,11 +33,14 @@ function MenuForm() {
     if (!isEdit) return;
     async function load() {
       const res = await api('/menus/' + id);
-      if (res.success) {
+      if (res.status) {
         setForm({
           title: res.data.title || '',
           title_hi: res.data.title_hi || '',
           url: res.data.url || '#',
+          icon: res.data.icon || '',
+          slug: res.data.slug || '',
+          page_type: res.data.page_type || 'custom',
           sort_order: res.data.sort_order || 0,
           is_active: res.data.is_active
         });
@@ -53,11 +59,14 @@ function MenuForm() {
         title: form.title,
         title_hi: form.title_hi,
         url: form.url,
+        icon: form.icon,
+        slug: form.slug,
+        page_type: form.page_type,
         sort_order: Number(form.sort_order),
         is_active: form.is_active
       }
     });
-    if (res.success) {
+    if (res.status) {
       alert('Saved');
       goToList(navigate, isEdit ? savedParentId : parentId);
     } else {
@@ -83,6 +92,25 @@ function MenuForm() {
           <label>URL</label>
           <input value={form.url} onChange={function (e) { setField('url', e.target.value); }} />
           <div className="hint">Use # if this item only opens more sub menus</div>
+        </div>
+        <div className="form-group">
+          <label>Slug</label>
+          <input value={form.slug} onChange={function (e) { setField('slug', e.target.value); }} placeholder="about-us" />
+        </div>
+        <div className="form-group">
+          <label>Icon Name</label>
+          <input value={form.icon} onChange={function (e) { setField('icon', e.target.value); }} placeholder="building" />
+        </div>
+        <div className="form-group">
+          <label>Page Type</label>
+          <select value={form.page_type} onChange={function (e) { setField('page_type', e.target.value); }}>
+            <option value="custom">custom</option>
+            <option value="static">static</option>
+            <option value="dynamic">dynamic</option>
+            <option value="table">table</option>
+            <option value="link">link</option>
+            <option value="page">page</option>
+          </select>
         </div>
         <div className="form-group">
           <label>Sort order</label>

@@ -7,7 +7,7 @@ function Stats() {
 
   async function load() {
     const res = await api('/stats');
-    if (res.success) setList(res.data);
+    if (res.status) setList(res.data);
   }
 
   useEffect(function () { load(); }, []);
@@ -15,7 +15,7 @@ function Stats() {
   async function remove(id) {
     if (!window.confirm('Delete this item?')) return;
     const res = await api('/stats/' + id, { method: 'DELETE' });
-    if (res.success) load();
+    if (res.status) load();
   }
 
   return (

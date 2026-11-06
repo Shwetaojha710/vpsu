@@ -7,7 +7,7 @@ function QuickLinks() {
 
   async function load() {
     const res = await api('/quick-links');
-    if (res.success) setList(res.data);
+    if (res.status) setList(res.data);
   }
 
   useEffect(function () { load(); }, []);
@@ -15,7 +15,7 @@ function QuickLinks() {
   async function remove(id) {
     if (!window.confirm('Delete this item?')) return;
     const res = await api('/quick-links/' + id, { method: 'DELETE' });
-    if (res.success) load();
+    if (res.status) load();
   }
 
   return (
@@ -32,6 +32,7 @@ function QuickLinks() {
             <thead>
               <tr>
                 <th>ID</th>
+                <th>Icon</th>
                 <th>Title</th>
                 <th>URL</th>
                 <th>Order</th>
@@ -43,6 +44,9 @@ function QuickLinks() {
                 return (
                   <tr key={row.id}>
                     <td>{row.id}</td>
+                    <td>
+                      {row.icon ? <img className="preview" src={'/uploads/' + row.icon} alt="" /> : '-'}
+                    </td>
                     <td>{row.title}</td>
                     <td>{row.url}</td>
                     <td>{row.sort_order}</td>

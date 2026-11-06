@@ -7,7 +7,7 @@ function Colleges() {
 
   async function load() {
     const res = await api('/colleges');
-    if (res.success) setList(res.data);
+    if (res.status) setList(res.data);
   }
 
   useEffect(function () { load(); }, []);
@@ -15,7 +15,7 @@ function Colleges() {
   async function remove(id) {
     if (!window.confirm('Delete this item?')) return;
     const res = await api('/colleges/' + id, { method: 'DELETE' });
-    if (res.success) load();
+    if (res.status) load();
   }
 
   return (

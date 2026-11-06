@@ -8,7 +8,7 @@ function Dashboard() {
     // this function loads counts from backend
     async function load() {
       const res = await api('/dashboard');
-      if (res.success) setData(res.data);
+      if (res.status) setData(res.data);
     }
     load();
   }, []);

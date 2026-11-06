@@ -8,7 +8,7 @@ function Notices() {
   async function load() {
     // this function loads all notices from backend
     const res = await api('/notices');
-    if (res.success) setList(res.data);
+    if (res.status) setList(res.data);
   }
 
   useEffect(function () {
@@ -18,7 +18,7 @@ function Notices() {
   async function remove(id) {
     if (!window.confirm('Delete this item?')) return;
     const res = await api('/notices/' + id, { method: 'DELETE' });
-    if (res.success) load();
+    if (res.status) load();
   }
 
   return (

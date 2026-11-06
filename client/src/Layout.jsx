@@ -6,12 +6,18 @@ const menus = [
   { to: '/notices', label: 'Notices' },
   { to: '/pages', label: 'Pages' },
   { to: '/menus', label: 'Menus' },
+  { to: '/sections', label: 'Sections' },
+  { to: '/side-menus', label: 'Side Menus' },
+  { to: '/professors', label: 'Professors' },
+  { to: '/banners', label: 'Banners' },
+  { to: '/section-photos', label: 'Dept Photos' },
   { to: '/slider', label: 'Slider' },
   { to: '/leaders', label: 'Leaders' },
   { to: '/stats', label: 'Stats' },
   { to: '/quick-links', label: 'Quick Links' },
   { to: '/galleries', label: 'Gallery' },
   { to: '/colleges', label: 'Colleges' },
+  { to: '/lms/contents', label: 'LMS Contents' },
   { to: '/change-password', label: 'Change Password' }
 ];
 

@@ -14,7 +14,7 @@ function GalleryForm() {
     if (!isEdit) return;
     async function load() {
       const res = await api('/galleries/' + id);
-      if (res.success) {
+      if (res.status) {
         setTitle(res.data.title || '');
         setOldImage(res.data.image || '');
       }
@@ -32,7 +32,7 @@ function GalleryForm() {
       method: isEdit ? 'PUT' : 'POST',
       body: fd
     });
-    if (res.success) {
+    if (res.status) {
       alert('Saved');
       navigate('/galleries');
     } else {

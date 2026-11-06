@@ -18,7 +18,7 @@ function StatForm() {
     if (!isEdit) return;
     async function load() {
       const res = await api('/stats/' + id);
-      if (res.success) {
+      if (res.status) {
         setForm({
           label: res.data.label || '',
           value: res.data.value || '',
@@ -41,7 +41,7 @@ function StatForm() {
         sort_order: Number(form.sort_order)
       }
     });
-    if (res.success) {
+    if (res.status) {
       alert('Saved');
       navigate('/stats');
     } else {

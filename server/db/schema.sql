@@ -2,6 +2,14 @@
 -- Run this file after: CREATE DATABASE vpsu;
 
 -- delete old tables if we run this file again
+DROP TABLE IF EXISTS page_table_rows;
+DROP TABLE IF EXISTS page_tables;
+DROP TABLE IF EXISTS professors;
+DROP TABLE IF EXISTS side_menu_files;
+DROP TABLE IF EXISTS side_menus;
+DROP TABLE IF EXISTS section_photos;
+DROP TABLE IF EXISTS banners;
+DROP TABLE IF EXISTS sections;
 DROP TABLE IF EXISTS sub_menus;
 DROP TABLE IF EXISTS menus;
 DROP TABLE IF EXISTS notices;
@@ -83,7 +91,7 @@ CREATE TABLE quick_links (
   id SERIAL PRIMARY KEY,
   title VARCHAR(150) NOT NULL,
   url VARCHAR(255) NOT NULL,
-  icon VARCHAR(50),
+  icon VARCHAR(255),
   sort_order INT DEFAULT 0,
   is_active BOOLEAN DEFAULT true
 );
@@ -115,6 +123,112 @@ CREATE TABLE menus (
   title VARCHAR(150) NOT NULL,
   title_hi VARCHAR(150),
   url VARCHAR(255) DEFAULT '#',
+  icon VARCHAR(100),
+  slug VARCHAR(150),
+  page_type VARCHAR(20) DEFAULT 'custom',
+  sort_order INT DEFAULT 0,
+  is_active BOOLEAN DEFAULT true,
+  is_header BOOLEAN DEFAULT false,
+  is_faculty BOOLEAN DEFAULT false,
+  is_department BOOLEAN DEFAULT false
+);
+
+-- 11) sections: Faculty, Cell, Institute... (Dean/Professors belong to one section)
+CREATE TABLE sections (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  name_hi VARCHAR(255),
+  type VARCHAR(50) DEFAULT 'faculty',
+  slug VARCHAR(150) UNIQUE,
   sort_order INT DEFAULT 0,
   is_active BOOLEAN DEFAULT true
 );
+
+-- 12) side_menus: left sidebar pages under a section
+CREATE TABLE side_menus (
+  id SERIAL PRIMARY KEY,
+  section_id INT NOT NULL REFERENCES sections(id) ON DELETE CASCADE,
+  title VARCHAR(255) NOT NULL,
+  title_hi VARCHAR(255),
+  slug VARCHAR(255),
+  page_type VARCHAR(20) DEFAULT 'static',
+  content TEXT,
+  content_hi TEXT,
+  sort_order INT DEFAULT 0,
+  is_active BOOLEAN DEFAULT true
+);
+
+-- 13) professors: teachers linked to a section
+CREATE TABLE professors (
+  id SERIAL PRIMARY KEY,
+  section_id INT NOT NULL REFERENCES sections(id) ON DELETE CASCADE,
+  name VARCHAR(150) NOT NULL,
+  name_hi VARCHAR(150),
+  designation VARCHAR(150),
+  designation_hi VARCHAR(150),
+  photo VARCHAR(255),
+  email VARCHAR(150),
+  phone VARCHAR(20),
+  profile_text TEXT,
+  profile_text_hi TEXT,
+  sort_order INT DEFAULT 0,
+  is_active BOOLEAN DEFAULT true
+);
+
+-- 14) banners: department page top banner
+CREATE TABLE banners (
+  id SERIAL PRIMARY KEY,
+  section_id INT NOT NULL REFERENCES sections(id) ON DELETE CASCADE,
+  title VARCHAR(255),
+  title_hi VARCHAR(255),
+  image VARCHAR(255),
+  sort_order INT DEFAULT 0,
+  is_active BOOLEAN DEFAULT true
+);
+
+-- 15) section_photos: department photo gallery
+CREATE TABLE section_photos (
+  id SERIAL PRIMARY KEY,
+  section_id INT NOT NULL REFERENCES sections(id) ON DELETE CASCADE,
+  title VARCHAR(255),
+  title_hi VARCHAR(255),
+  image VARCHAR(255),
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- 16) side_menu_files: PDFs for table-type pages (notices, ordinances)
+CREATE TABLE side_menu_files (
+  id SERIAL PRIMARY KEY,
+  side_menu_id INT NOT NULL REFERENCES side_menus(id) ON DELETE CASCADE,
+  title VARCHAR(255) NOT NULL,
+  title_hi VARCHAR(255),
+  file_name VARCHAR(255),
+  language VARCHAR(50) DEFAULT 'English',
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- 17) page_tables: header/column config for menu page_type=table
+CREATE TABLE page_tables (
+  id SERIAL PRIMARY KEY,
+  menu_id INT NOT NULL UNIQUE REFERENCES menus(id) ON DELETE CASCADE,
+  layout_type VARCHAR(20) DEFAULT 'table',
+  description TEXT,
+  tables_config JSONB DEFAULT '[]'::jsonb,
+  is_active BOOLEAN DEFAULT true,
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW()
+);
+
+-- 18) page_table_rows: row data for page tables
+CREATE TABLE page_table_rows (
+  id SERIAL PRIMARY KEY,
+  page_table_id INT NOT NULL REFERENCES page_tables(id) ON DELETE CASCADE,
+  table_key VARCHAR(100) DEFAULT '',
+  data JSONB DEFAULT '{}'::jsonb,
+  sort_order INT DEFAULT 0,
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Link CMS pages to menus (added after menus exists)
+ALTER TABLE pages
+  ADD COLUMN IF NOT EXISTS menu_id INT REFERENCES menus(id) ON DELETE SET NULL;

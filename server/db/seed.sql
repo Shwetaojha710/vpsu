@@ -10,6 +10,7 @@ INSERT INTO admins (name, email, password, role) VALUES
 );
 
 INSERT INTO notices (title, title_hi, description, category, is_pinned, is_published) VALUES
+('MBA, MBA Agri-Business and MBA E-Commerce admission notice 2026-27', 'एमबीए, एमबीए एग्री-बिजनेस एवं एमबीए ई-कॉमर्स प्रवेश सूचना 2026-27', 'Online applications are invited for MBA programmes for session 2026-27.', 'admission', true, true),
 ('Online exam form for session 2025-26 is now open', 'सत्र 2025-26 हेतु ऑनलाइन परीक्षा फॉर्म खुला है', 'Students can fill the exam form and pay the fee from the student portal.', 'exam', true, true),
 ('PUCAT Admission Notice 2026-27', 'पी.यू.कैट प्रवेश सूचना 2026-27', 'Apply online for campus courses. Last date will be updated on the website.', 'admission', true, true),
 ('Faculty recruitment for Professor and Assistant Professor', 'प्रोफेसर एवं सहायक आचार्य हेतु भर्ती', 'Online applications are invited for teaching posts in various departments.', 'recruitment', false, true),
@@ -44,11 +45,9 @@ INSERT INTO pages (slug, title, title_hi, content, content_hi, is_published) VAL
  true);
 
 INSERT INTO slider (title, image, link, sort_order, is_active) VALUES
-('Welcome to VPSU Jaunpur', '', '/about', 1, true),
-('NAAC A+ Accredited State University', '', '/about', 2, true),
-('Admissions Open 2026-27', '', '/admission', 3, true),
-('Examination Notices and Results', '', '/examination', 4, true),
-('Research and PhD Programmes', '', '/research', 5, true);
+('30th Convocation – 27 July 2026', 'banner-1.svg', '/', 1, true),
+('NAAC A+ Accredited State University', 'banner-2.svg', '/about', 2, true),
+('Admissions Open 2026-27', 'banner-3.svg', '/admission', 3, true);
 
 INSERT INTO leaders (name, designation, photo, profile_text, sort_order) VALUES
 ('Smt. Anandiben Patel', 'Governor & Chancellor', '', 'Honble Governor of Uttar Pradesh and Chancellor of the University.', 1),
@@ -64,20 +63,26 @@ INSERT INTO stats (label, value, icon, sort_order) VALUES
 ('Faculties', '8', 'faculty', 5);
 
 INSERT INTO quick_links (title, url, icon, sort_order, is_active) VALUES
-('Examination Form', 'https://vbspu.ac.in', 'exam', 1, true),
-('Results', 'https://vbspu.ac.in', 'result', 2, true),
-('College Login', 'https://vbspu.ac.in', 'college', 3, true),
-('Campus Online Fee', 'https://vbspu.ac.in', 'fee', 4, true),
-('PhD Online Fee', 'https://vbspu.ac.in', 'phd', 5, true),
-('Training & Placement', 'https://vbspu.ac.in', 'placement', 6, true);
+('New College Login / Results', 'https://vbspu.ac.in', 'icon-college.png', 1, true),
+('Online Services', 'https://vbspu.ac.in', 'icon-link.png', 2, true),
+('University Blog', 'https://vbspu.ac.in', 'icon-blog.png', 3, true),
+('Examination Form', 'https://vbspu.ac.in', 'icon-exam.png', 4, true),
+('PhD Online Fee', 'https://vbspu.ac.in', 'icon-phd.png', 5, true),
+('National Education Policy', '/nep', 'icon-nep.png', 6, true),
+('Training & Placement', '/placement', 'icon-place.png', 7, true),
+('Recruitment', '/recruitment', 'icon-recruit.png', 8, true),
+('Campus Online Fee', 'https://vbspu.ac.in', 'icon-fee.png', 9, true),
+('IQAC', '/iqac', 'icon-iqac.png', 10, true),
+('SWAYAM', '/swayam', 'icon-swayam.png', 11, true),
+('Results', 'https://vbspu.ac.in', 'icon-result.png', 12, true);
 
 INSERT INTO galleries (title, image) VALUES
-('Campus Main Building', ''),
-('Convocation Ceremony', ''),
-('Independence Day Celebration', ''),
-('Sports Meet', ''),
-('Library Building', ''),
-('Science Block', '');
+('Campus Main Building', 'gallery-1.svg'),
+('Convocation Ceremony', 'gallery-2.svg'),
+('Independence Day Celebration', 'gallery-3.svg'),
+('Sports Meet', 'gallery-4.svg'),
+('Library Building', 'gallery-5.svg'),
+('Science Block', 'gallery-6.svg');
 
 INSERT INTO colleges (name, code, district, type, email, phone, is_active) VALUES
 ('Tilak Dhari Post Graduate College', 'TDPG01', 'Jaunpur', 'government', 'tdpg@example.com', '05452220001', true),
@@ -96,8 +101,12 @@ INSERT INTO menus (title, title_hi, url, sort_order, is_active) VALUES
 ('Examination', 'परीक्षा', '/examination', 6, true),
 ('Facilities', 'सुविधाएँ', '#', 7, true),
 ('Affiliation', 'सम्बद्धता', '/affiliation', 8, true),
-('Alumni', 'पूर्व छात्र', '/alumni', 9, true),
-('Grievance', 'शिकायत', '/grievance', 10, true);
+('University Staff Corner', 'विश्वविद्यालय स्टाफ कॉर्नर', '#', 9, true),
+('Cell', 'प्रकोष्ठ', '#', 10, true),
+('Alumni', 'पूर्व छात्र', '/alumni', 11, true),
+('Grievance', 'शिकायत', '/grievance', 12, true),
+('E-content', 'ई-कंटेंट', '#', 13, true),
+('ERP', 'ईआरपी', 'https://vbspu.ac.in', 14, true);
 
 INSERT INTO menus (parent_id, title, title_hi, url, sort_order, is_active)
 SELECT id, 'About University', 'विश्वविद्यालय परिचय', '/about', 1, true FROM menus WHERE title = 'University' AND parent_id IS NULL;
@@ -159,3 +168,55 @@ INSERT INTO menus (parent_id, title, title_hi, url, sort_order, is_active)
 SELECT id, 'Affiliated Colleges', 'सम्बद्ध महाविद्यालय', '/colleges', 1, true FROM menus WHERE title = 'Affiliation' AND parent_id IS NULL;
 INSERT INTO menus (parent_id, title, title_hi, url, sort_order, is_active)
 SELECT id, 'New Affiliation', 'नई सम्बद्धता', '/affiliation/new', 2, true FROM menus WHERE title = 'Affiliation' AND parent_id IS NULL;
+
+INSERT INTO menus (parent_id, title, title_hi, url, sort_order, is_active)
+SELECT id, 'Teaching Staff', 'शैक्षणिक स्टाफ', '/teaching-staff', 1, true FROM menus WHERE title = 'University Staff Corner' AND parent_id IS NULL;
+INSERT INTO menus (parent_id, title, title_hi, url, sort_order, is_active)
+SELECT id, 'Non-Teaching Staff', 'अशैक्षणिक स्टाफ', '/non-teaching-staff', 2, true FROM menus WHERE title = 'University Staff Corner' AND parent_id IS NULL;
+INSERT INTO menus (parent_id, title, title_hi, url, sort_order, is_active)
+SELECT id, 'Recruitment', 'भर्ती', '/recruitment', 3, true FROM menus WHERE title = 'University Staff Corner' AND parent_id IS NULL;
+
+INSERT INTO menus (parent_id, title, title_hi, url, sort_order, is_active)
+SELECT id, 'IQAC', 'आईक्यूएसी', '/iqac', 1, true FROM menus WHERE title = 'Cell' AND parent_id IS NULL;
+INSERT INTO menus (parent_id, title, title_hi, url, sort_order, is_active)
+SELECT id, 'NSS', 'एनएसएस', '/nss', 2, true FROM menus WHERE title = 'Cell' AND parent_id IS NULL;
+INSERT INTO menus (parent_id, title, title_hi, url, sort_order, is_active)
+SELECT id, 'Training & Placement', 'प्रशिक्षण एवं स्थापना', '/placement', 3, true FROM menus WHERE title = 'Cell' AND parent_id IS NULL;
+
+INSERT INTO menus (parent_id, title, title_hi, url, sort_order, is_active)
+SELECT id, 'SWAYAM', 'स्वयं', '/swayam', 1, true FROM menus WHERE title = 'E-content' AND parent_id IS NULL;
+INSERT INTO menus (parent_id, title, title_hi, url, sort_order, is_active)
+SELECT id, 'e-Library', 'ई-पुस्तकालय', '/e-library', 2, true FROM menus WHERE title = 'E-content' AND parent_id IS NULL;
+
+INSERT INTO sections (name, name_hi, type, slug, sort_order, is_active) VALUES
+('Faculty of Engineering & Technology', 'अभियांत्रिकी एवं प्रौद्योगिकी संकाय', 'faculty', 'engineering', 1, true),
+('Faculty of Science', 'विज्ञान संकाय', 'faculty', 'science', 2, true),
+('Faculty of Management Studies', 'प्रबंधन अध्ययन संकाय', 'faculty', 'management', 3, true),
+('IQAC', 'आईक्यूएसी', 'cell', 'iqac', 4, true);
+
+INSERT INTO side_menus (section_id, title, title_hi, slug, content, sort_order, is_active)
+SELECT id, 'Dean of Faculty (FET)', 'संकाय अध्यक्ष', 'dean',
+'<h2>Legacy of Excellence in Technical Education</h2><p>The Faculty of Engineering and Technology provides quality technical education and research opportunities for students.</p>',
+1, true FROM sections WHERE slug = 'engineering';
+INSERT INTO side_menus (section_id, title, title_hi, slug, content, sort_order, is_active)
+SELECT id, 'Dept. of Computer Science & Engineering', 'कंप्यूटर विज्ञान एवं अभियंत्रण', 'cse',
+'<p>Department of Computer Science and Engineering.</p>',
+2, true FROM sections WHERE slug = 'engineering';
+INSERT INTO side_menus (section_id, title, title_hi, slug, content, sort_order, is_active)
+SELECT id, 'Dept. of Information Technology', 'सूचना प्रौद्योगिकी', 'it',
+'<p>Department of Information Technology.</p>',
+3, true FROM sections WHERE slug = 'engineering';
+INSERT INTO side_menus (section_id, title, title_hi, slug, content, sort_order, is_active)
+SELECT id, 'About the Faculty', 'संकाय परिचय', 'about',
+'<p>Welcome to the Faculty of Science.</p>',
+1, true FROM sections WHERE slug = 'science';
+
+INSERT INTO professors (section_id, name, name_hi, designation, designation_hi, email, profile_text, profile_text_hi, sort_order, is_active)
+SELECT id, 'Prof. A. K. Sharma', 'प्रो. ए. के. शर्मा', 'Dean & Professor', 'संकाय अध्यक्ष एवं आचार्य', 'dean.fet@example.com', 'Dean, Faculty of Engineering and Technology.', 'संकाय अध्यक्ष, अभियंत्रण एवं प्रौद्योगिकी संकाय।', 1, true
+FROM sections WHERE slug = 'engineering';
+INSERT INTO professors (section_id, name, name_hi, designation, designation_hi, email, profile_text, profile_text_hi, sort_order, is_active)
+SELECT id, 'Dr. Neha Verma', 'डॉ. नेहा वर्मा', 'Associate Professor, CSE', 'सह आचार्य, सीएसई', 'neha.cse@example.com', 'Department of Computer Science and Engineering.', 'कंप्यूटर विज्ञान एवं अभियंत्रण विभाग।', 2, true
+FROM sections WHERE slug = 'engineering';
+INSERT INTO professors (section_id, name, name_hi, designation, designation_hi, email, profile_text, profile_text_hi, sort_order, is_active)
+SELECT id, 'Dr. Rakesh Singh', 'डॉ. राकेश सिंह', 'Professor', 'आचार्य', 'rakesh.sci@example.com', 'Faculty of Science.', 'विज्ञान संकाय।', 1, true
+FROM sections WHERE slug = 'science';
